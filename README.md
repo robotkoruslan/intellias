@@ -334,20 +334,6 @@ Edit `src/data/playbook.md` to add or modify best practices specific to your org
 
 Edit `src/lib/plan-generator.ts` to adjust task templates for 30-60-90 day plans.
 
-## Future Enhancements
-
-Potential improvements for production deployment:
-
-- **LLM Integration**: Add OpenAI/Anthropic API for more dynamic plan generation
-- **Database Storage**: Replace in-memory state with PostgreSQL/MongoDB
-- **User Authentication**: Add user accounts and saved projects
-- **Collaboration**: Multi-user project editing
-- **Version Control**: Track changes to ideas and plans over time
-- **Advanced Visualizations**: Interactive charts for impact/effort matrix
-- **Export Options**: PDF, DOCX, and CSV export functionality
-- **Email Notifications**: Milestone reminders and deadline alerts
-- **Template Library**: Pre-built templates for common PoC types
-
 ## License
 
 MIT
