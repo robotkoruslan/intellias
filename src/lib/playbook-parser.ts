@@ -2,11 +2,6 @@ import { PlaybookSection, Idea } from '@/types';
 import fs from 'fs';
 import path from 'path';
 
-/**
- * Parse the playbook markdown file into structured sections
- *
- * @returns Array of playbook sections
- */
 export function parsePlaybook(): PlaybookSection[] {
   const playbookPath = path.join(process.cwd(), 'src', 'data', 'playbook.md');
   const content = fs.readFileSync(playbookPath, 'utf-8');
@@ -19,9 +14,7 @@ export function parsePlaybook(): PlaybookSection[] {
   let currentTips: string[] = [];
 
   for (const line of lines) {
-    // H2 headers are categories (## Risk Management)
     if (line.startsWith('## ')) {
-      // Save previous section if exists
       if (currentSection && currentTips.length > 0) {
         sections.push({
           title: currentSection,
@@ -33,10 +26,7 @@ export function parsePlaybook(): PlaybookSection[] {
       currentCategory = line.replace('## ', '').trim();
       currentSection = '';
       currentTips = [];
-    }
-    // H3 headers are sections (### High Risk Ideas)
-    else if (line.startsWith('### ')) {
-      // Save previous section if exists
+    } else if (line.startsWith('### ')) {
       if (currentSection && currentTips.length > 0) {
         sections.push({
           title: currentSection,
@@ -47,9 +37,7 @@ export function parsePlaybook(): PlaybookSection[] {
 
       currentSection = line.replace('### ', '').trim();
       currentTips = [];
-    }
-    // List items are tips
-    else if (line.startsWith('- ') || line.startsWith('* ')) {
+    } else if (line.startsWith('- ') || line.startsWith('* ')) {
       const tip = line.replace(/^[-*] /, '').trim();
       if (tip) {
         currentTips.push(tip);
@@ -57,7 +45,6 @@ export function parsePlaybook(): PlaybookSection[] {
     }
   }
 
-  // Save last section
   if (currentSection && currentTips.length > 0) {
     sections.push({
       title: currentSection,
@@ -69,12 +56,6 @@ export function parsePlaybook(): PlaybookSection[] {
   return sections;
 }
 
-/**
- * Get relevant best practices for an idea based on its metrics
- *
- * @param idea - The idea to get practices for
- * @returns Array of relevant tips
- */
 export function getRelevantPractices(idea: Idea): string[] {
   const sections = parsePlaybook();
   const relevantTips: string[] = [];
@@ -114,9 +95,7 @@ export function getRelevantPractices(idea: Idea): string[] {
     relevantSections.push('Low-Medium Effort Ideas');
   }
 
-  // Collect tips from relevant sections with explicit citations
   for (const section of sections) {
-    // Use partial match to handle sections with ranges like "High Risk Ideas (Risk > 7)"
     const matchesAnySection = relevantSections.some(relevantSection => section.title.startsWith(relevantSection));
 
     if (matchesAnySection) {
@@ -136,13 +115,6 @@ export function getRelevantPractices(idea: Idea): string[] {
   return relevantTips;
 }
 
-/**
- * Get playbook section by category and title
- *
- * @param category - Category name
- * @param title - Section title (optional)
- * @returns Array of matching sections
- */
 export function getPlaybookSection(category: string, title?: string): PlaybookSection[] {
   const sections = parsePlaybook();
 

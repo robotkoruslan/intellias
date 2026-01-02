@@ -1,7 +1,3 @@
-/**
- * Core types for AI Ideas Ranking Tool
- */
-
 export interface Idea {
   id: string;
   title: string;
