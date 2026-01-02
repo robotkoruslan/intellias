@@ -74,14 +74,29 @@ export default function IdeaUpload({ onSubmit, loading }: IdeaUploadProps) {
   const handleSubmit = () => {
     setError(null);
 
-    const validIdeas = ideas.filter(idea => idea.title.trim() && idea.description.trim());
+    // Validate each idea and collect errors
+    const validationErrors: string[] = [];
 
-    if (validIdeas.length === 0) {
-      setError('Please add at least one valid idea');
+    ideas.forEach((idea, index) => {
+      const ideaNumber = index + 1;
+
+      if (!idea.title.trim()) {
+        validationErrors.push(`Idea #${ideaNumber}: Title is required`);
+      }
+
+      if (!idea.description.trim()) {
+        validationErrors.push(`Idea #${ideaNumber}: Description is required`);
+      }
+    });
+
+    // If there are validation errors, show them
+    if (validationErrors.length > 0) {
+      setError(validationErrors.join('. '));
       return;
     }
 
-    onSubmit(validIdeas);
+    // All ideas are valid, submit them
+    onSubmit(ideas);
   };
 
   return (
@@ -223,4 +238,3 @@ export default function IdeaUpload({ onSubmit, loading }: IdeaUploadProps) {
     </div>
   );
 }
-
