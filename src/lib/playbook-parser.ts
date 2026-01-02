@@ -4,7 +4,7 @@ import path from 'path';
 
 /**
  * Parse the playbook markdown file into structured sections
- * 
+ *
  * @returns Array of playbook sections
  */
 export function parsePlaybook(): PlaybookSection[] {
@@ -71,7 +71,7 @@ export function parsePlaybook(): PlaybookSection[] {
 
 /**
  * Get relevant best practices for an idea based on its metrics
- * 
+ *
  * @param idea - The idea to get practices for
  * @returns Array of relevant tips
  */
@@ -114,17 +114,23 @@ export function getRelevantPractices(idea: Idea): string[] {
     relevantSections.push('Low-Medium Effort Ideas');
   }
 
-  // Collect tips from relevant sections
+  // Collect tips from relevant sections with explicit citations
   for (const section of sections) {
-    if (relevantSections.includes(section.title)) {
-      relevantTips.push(...section.tips);
+    // Use partial match to handle sections with ranges like "High Risk Ideas (Risk > 7)"
+    const matchesAnySection = relevantSections.some(relevantSection => section.title.startsWith(relevantSection));
+
+    if (matchesAnySection) {
+      // Add tips with citation prefix
+      const tipsWithCitation = section.tips.map(tip => `💡 Playbook (${section.category}): ${tip}`);
+      relevantTips.push(...tipsWithCitation);
     }
   }
 
   // Also add general best practices
   const generalSection = sections.find(s => s.category === 'Common Pitfalls to Avoid');
   if (generalSection) {
-    relevantTips.push(...generalSection.tips.slice(0, 3)); // Add top 3 pitfalls
+    const pitfallsWithCitation = generalSection.tips.slice(0, 3).map(tip => `⚠️ Playbook (Common Pitfalls): ${tip}`);
+    relevantTips.push(...pitfallsWithCitation);
   }
 
   return relevantTips;
@@ -132,19 +138,17 @@ export function getRelevantPractices(idea: Idea): string[] {
 
 /**
  * Get playbook section by category and title
- * 
+ *
  * @param category - Category name
  * @param title - Section title (optional)
  * @returns Array of matching sections
  */
 export function getPlaybookSection(category: string, title?: string): PlaybookSection[] {
   const sections = parsePlaybook();
-  
+
   return sections.filter(section => {
     const categoryMatch = section.category.toLowerCase().includes(category.toLowerCase());
     const titleMatch = title ? section.title.toLowerCase().includes(title.toLowerCase()) : true;
     return categoryMatch && titleMatch;
   });
 }
-
-

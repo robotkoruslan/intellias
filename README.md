@@ -71,6 +71,17 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+### Demo Walkthrough
+
+For a complete step-by-step demonstration of all features, see **[DEMO-SCENARIO.md](DEMO-SCENARIO.md)**.
+
+This guide includes:
+
+- Quick test scenarios (5-10 minutes)
+- Sample data workflows
+- Edge case testing
+- Feature validation checklist
+
 ### Build for Production
 
 ```bash
@@ -105,7 +116,13 @@ Two methods available:
 
 #### JSON Upload
 
-Upload ideas in JSON format:
+Upload ideas in JSON format or load sample data:
+
+**Option 1: Load Sample Data (Quick Start)**
+
+- Click "📋 Load Sample Data" button to instantly load 12 example AI/ML ideas
+
+**Option 2: Paste JSON**
 
 ```json
 [
@@ -334,7 +351,3 @@ Potential improvements for production deployment:
 ## License
 
 MIT
-
-## Author
-
-Created as a technical assessment project for Intellias.

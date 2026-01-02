@@ -8,9 +8,10 @@ import RankingResults from '@/components/ranking-results';
 import PlanViewer from '@/components/plan-viewer';
 import ExperimentCardViewer from '@/components/experiment-card-viewer';
 import { Idea, Constraints, RankingResult, Plan, ExperimentCard } from '@/types';
+import { ideasApi } from '@/api/ideas-api';
+import { getErrorMessage } from '@/utils/error-handler';
 
 export default function Home() {
-  const [ideas, setIdeas] = useState<Idea[]>([]);
   const [constraints, setConstraints] = useState<Constraints>({
     budget: 50000,
     teamSize: 3,
@@ -23,28 +24,15 @@ export default function Home() {
   const [step, setStep] = useState<'upload' | 'results' | 'plans' | 'cards'>('upload');
 
   const handleIdeasSubmit = async (submittedIdeas: Idea[]) => {
-    setIdeas(submittedIdeas);
     setLoading(true);
     setError(null);
 
     try {
-      // Rank ideas
-      const rankingResponse = await fetch('/api/ranking', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ideas: submittedIdeas }),
-      });
-
-      if (!rankingResponse.ok) {
-        const errorData = await rankingResponse.json();
-        throw new Error(errorData.error || 'Failed to rank ideas');
-      }
-
-      const rankingData = await rankingResponse.json();
+      const rankingData = await ideasApi.rankIdeas(submittedIdeas);
       setRankingResult(rankingData);
       setStep('results');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(getErrorMessage(err, 'Failed to rank ideas'));
     } finally {
       setLoading(false);
     }
@@ -57,24 +45,12 @@ export default function Home() {
     setError(null);
 
     try {
-      // Generate plans for top picks
       const topIdeas = rankingResult.topPicks;
-
-      const planResponse = await fetch('/api/plan', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ideas: topIdeas, constraints }),
-      });
-
-      if (!planResponse.ok) {
-        throw new Error('Failed to generate plans');
-      }
-
-      const planData = await planResponse.json();
-      setPlans(planData.plans);
+      const plansData = await ideasApi.generatePlans(topIdeas, constraints);
+      setPlans(plansData);
       setStep('plans');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(getErrorMessage(err, 'Failed to generate plans'));
     } finally {
       setLoading(false);
     }
@@ -87,31 +63,18 @@ export default function Home() {
     setError(null);
 
     try {
-      // Generate card for the top-ranked idea only
       const topIdea = rankingResult.topPicks[0];
-
-      const cardResponse = await fetch('/api/experiment-card', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ idea: topIdea }),
-      });
-
-      if (!cardResponse.ok) {
-        throw new Error('Failed to generate experiment card');
-      }
-
-      const cardData = await cardResponse.json();
-      setExperimentCard(cardData.card);
+      const card = await ideasApi.generateExperimentCard(topIdea);
+      setExperimentCard(card);
       setStep('cards');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(getErrorMessage(err, 'Failed to generate experiment card'));
     } finally {
       setLoading(false);
     }
   };
 
   const handleReset = () => {
-    setIdeas([]);
     setRankingResult(null);
     setPlans([]);
     setExperimentCard(null);

@@ -1,13 +1,5 @@
 import { Idea, Plan, Constraints, Milestone } from '@/types';
 
-/**
- * Generate a 30-60-90 day plan for a PoC idea
- * Rule-based approach with templates
- * 
- * @param idea - The idea to create plan for
- * @param constraints - Budget and team constraints
- * @returns Generated plan
- */
 export function generatePlan(idea: Idea, constraints: Constraints): Plan {
   const isHighEffort = idea.effort >= 7;
   const isHighRisk = idea.risk >= 7;
@@ -108,9 +100,7 @@ export function generatePlan(idea: Idea, constraints: Constraints): Plan {
   // Calculate resource estimates
   const baseTeamSize = Math.min(constraints.teamSize, idea.effort >= 7 ? 5 : 3);
   const effortMultiplier = idea.effort / 10;
-  const estimatedCost = Math.round(
-    (constraints.budget * effortMultiplier * baseTeamSize) / constraints.teamSize
-  );
+  const estimatedCost = Math.round((constraints.budget * effortMultiplier * baseTeamSize) / constraints.teamSize);
 
   // Generate milestones
   const milestones: Milestone[] = [
@@ -150,15 +140,6 @@ export function generatePlan(idea: Idea, constraints: Constraints): Plan {
   };
 }
 
-/**
- * Generate plans for multiple ideas
- * 
- * @param ideas - Array of ideas
- * @param constraints - Budget and team constraints
- * @returns Array of generated plans
- */
 export function generatePlans(ideas: Idea[], constraints: Constraints): Plan[] {
   return ideas.map(idea => generatePlan(idea, constraints));
 }
-
-

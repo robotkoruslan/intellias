@@ -187,6 +187,12 @@
   border-color: #667eea;
 }
 
+.uploadButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 .uploadButton {
   background: #667eea;
   color: white;
@@ -196,12 +202,29 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
-  align-self: flex-start;
+  transition: all 0.2s;
 }
 
 .uploadButton:hover {
   background: #5568d3;
+  transform: translateY(-1px);
+}
+
+.sampleButton {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sampleButton:hover {
+  background: #059669;
+  transform: translateY(-1px);
 }
 
 .submitSection {
@@ -237,6 +260,15 @@
 @media (max-width: 768px) {
   .metrics {
     grid-template-columns: 1fr;
+  }
+
+  .uploadButtons {
+    flex-direction: column;
+  }
+
+  .uploadButton,
+  .sampleButton {
+    width: 100%;
   }
 }
 
