@@ -11,11 +11,13 @@ import { Idea, Constraints, RankingResult, Plan, ExperimentCard } from '@/types'
 import { ideasApi } from '@/api/ideas-api';
 import { getErrorMessage } from '@/utils/error-handler';
 
+const DEFAULT_CONSTRAINTS: Constraints = {
+  budget: 50000,
+  teamSize: 3,
+};
+
 export default function Home() {
-  const [constraints, setConstraints] = useState<Constraints>({
-    budget: 50000,
-    teamSize: 3,
-  });
+  const [constraints, setConstraints] = useState<Constraints>(DEFAULT_CONSTRAINTS);
   const [rankingResult, setRankingResult] = useState<RankingResult | null>(null);
   const [plans, setPlans] = useState<Plan[]>([]);
   const [experimentCard, setExperimentCard] = useState<ExperimentCard | null>(null);
