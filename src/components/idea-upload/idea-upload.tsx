@@ -223,3 +223,4 @@ export default function IdeaUpload({ onSubmit, loading }: IdeaUploadProps) {
     </div>
   );
 }
+

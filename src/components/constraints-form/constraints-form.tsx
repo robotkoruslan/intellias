@@ -44,3 +44,4 @@ export default function ConstraintsForm({ constraints, onChange }: ConstraintsFo
     </div>
   );
 }
+

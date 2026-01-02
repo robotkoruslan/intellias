@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import styles from './page.module.css';
-import IdeaUpload from '@/components/idea-upload';
-import ConstraintsForm from '@/components/constraints-form';
-import RankingResults from '@/components/ranking-results';
-import PlanViewer from '@/components/plan-viewer';
-import ExperimentCardViewer from '@/components/experiment-card-viewer';
+import IdeaUpload from '@/components/idea-upload/idea-upload';
+import ConstraintsForm from '@/components/constraints-form/constraints-form';
+import RankingResults from '@/components/ranking-results/ranking-results';
+import PlanViewer from '@/components/plan-viewer/plan-viewer';
+import ExperimentCardViewer from '@/components/experiment-card-viewer/experiment-card-viewer';
 import { Idea, Constraints, RankingResult, Plan, ExperimentCard } from '@/types';
 import { ideasApi } from '@/api/ideas-api';
 import { getErrorMessage } from '@/utils/error-handler';
