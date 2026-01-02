@@ -1,0 +1,100 @@
+[
+  {
+    "title": "AI-Powered Customer Segmentation",
+    "description": "Use machine learning to automatically segment customers based on behavioral patterns, purchase history, and engagement metrics. This will enable personalized marketing campaigns and improve conversion rates.",
+    "impact": 8,
+    "effort": 6,
+    "risk": 4,
+    "dataReadiness": 7
+  },
+  {
+    "title": "Intelligent Document Processing",
+    "description": "Implement OCR and NLP to automatically extract and classify information from unstructured documents (invoices, contracts, forms). Reduce manual data entry by 80%.",
+    "impact": 9,
+    "effort": 7,
+    "risk": 5,
+    "dataReadiness": 6
+  },
+  {
+    "title": "Predictive Maintenance System",
+    "description": "Deploy ML models to predict equipment failures before they occur using IoT sensor data. Minimize downtime and reduce maintenance costs.",
+    "impact": 9,
+    "effort": 8,
+    "risk": 6,
+    "dataReadiness": 5
+  },
+  {
+    "title": "Chatbot for Customer Support",
+    "description": "Build an AI chatbot to handle common customer inquiries and provide 24/7 support. Reduce support ticket volume by 40% and improve response times.",
+    "impact": 7,
+    "effort": 5,
+    "risk": 3,
+    "dataReadiness": 8
+  },
+  {
+    "title": "Recommendation Engine",
+    "description": "Create a personalized product recommendation system based on collaborative filtering and user behavior analysis. Increase average order value by 25%.",
+    "impact": 8,
+    "effort": 6,
+    "risk": 4,
+    "dataReadiness": 7
+  },
+  {
+    "title": "Sentiment Analysis Dashboard",
+    "description": "Analyze customer feedback, reviews, and social media mentions to track brand sentiment in real-time. Provide actionable insights for product and marketing teams.",
+    "impact": 6,
+    "effort": 4,
+    "risk": 3,
+    "dataReadiness": 8
+  },
+  {
+    "title": "Demand Forecasting Model",
+    "description": "Implement time-series forecasting to predict product demand and optimize inventory levels. Reduce stockouts and overstock situations.",
+    "impact": 8,
+    "effort": 7,
+    "risk": 5,
+    "dataReadiness": 6
+  },
+  {
+    "title": "Fraud Detection System",
+    "description": "Use anomaly detection algorithms to identify fraudulent transactions in real-time. Minimize financial losses and improve security.",
+    "impact": 9,
+    "effort": 8,
+    "risk": 7,
+    "dataReadiness": 4
+  },
+  {
+    "title": "Voice Assistant Integration",
+    "description": "Add voice command capabilities to mobile app using speech recognition and natural language understanding. Improve accessibility and user experience.",
+    "impact": 5,
+    "effort": 6,
+    "risk": 5,
+    "dataReadiness": 7
+  },
+  {
+    "title": "Image Recognition for Quality Control",
+    "description": "Deploy computer vision models to automatically detect defects in manufacturing process. Improve product quality and reduce manual inspection time.",
+    "impact": 7,
+    "effort": 7,
+    "risk": 6,
+    "dataReadiness": 5
+  },
+  {
+    "title": "Email Subject Line Optimizer",
+    "description": "Use NLP and A/B testing data to generate optimized email subject lines that maximize open rates. Improve marketing email performance.",
+    "impact": 5,
+    "effort": 3,
+    "risk": 2,
+    "dataReadiness": 9
+  },
+  {
+    "title": "Churn Prediction Model",
+    "description": "Predict which customers are likely to churn within next 90 days using behavioral data and engagement metrics. Enable proactive retention campaigns.",
+    "impact": 8,
+    "effort": 5,
+    "risk": 4,
+    "dataReadiness": 7
+  }
+]
+
+
